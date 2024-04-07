@@ -11,6 +11,8 @@ composeBom = "2024.04.00"
 appcompat = "1.6.1"
 room = "2.6.1"
 ksp = "1.9.23-1.0.20"
+adaptive = "0.27.0"
+windowSizeClass = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -31,6 +33,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-adaptive", version.ref = "adaptive" }
+windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "windowSizeClass" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

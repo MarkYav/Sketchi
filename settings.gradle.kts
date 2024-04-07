@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Sketchi"
 include(":app")
 include(":data")
+include(":ui")

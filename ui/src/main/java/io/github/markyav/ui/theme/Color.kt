@@ -1,4 +1,4 @@
-package io.github.markyav.sketchi.ui.theme
+package io.github.markyav.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
