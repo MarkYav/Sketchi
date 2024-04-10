@@ -13,7 +13,7 @@ room = "2.6.1"
 ksp = "1.9.23-1.0.20"
 adaptive = "0.27.0"
 windowSizeClass = "1.2.1"
-decompose = "2.0.0-alpha-02"
+decompose = "3.0.0-beta01"
 drawbox = "1.3.0"
 composeCompiler = "1.5.11"
 
@@ -39,7 +39,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-adaptive", version.ref = "adaptive" }
 windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "windowSizeClass" }
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
-decompose-extensions = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack", version.ref = "decompose" }
+decompose-extensions = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
 drawbox = { group = "io.github.markyav.drawbox", name = "drawbox", version.ref = "drawbox" }
 
 [plugins]
