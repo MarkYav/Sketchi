@@ -23,5 +23,5 @@ rootProject.name = "Sketchi"
 include(":app")
 include(":data")
 include(":ui")
-include(":drawing")
-include(":store")
+include(":feature:drawing")
+include(":feature:store")
