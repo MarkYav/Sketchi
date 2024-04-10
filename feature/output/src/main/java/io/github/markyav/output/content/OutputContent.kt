@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import io.github.markyav.output.component.OutputComponent
 import io.github.markyav.output.component.OutputComponentTest
 import io.github.markyav.ui.util.AndroidPreviewDevices
