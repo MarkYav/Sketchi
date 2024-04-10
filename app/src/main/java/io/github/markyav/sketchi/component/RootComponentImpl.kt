@@ -8,7 +8,6 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.parcelable.Parcelable
 import io.github.markyav.drawbox.controller.DrawBoxSubscription
 import io.github.markyav.drawing.component.DrawingComponent
 import io.github.markyav.drawing.component.DrawingComponentImpl
@@ -21,8 +20,7 @@ import io.github.markyav.sketchi.component.RootComponent.Child.StoreChild
 import io.github.markyav.store.component.StoreComponent
 import io.github.markyav.store.component.StoreComponentImpl
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.parcelize.Parcelize
-
+import kotlinx.serialization.Serializable
 
 class RootComponentImpl(
     componentContext: ComponentContext,
@@ -32,6 +30,7 @@ class RootComponentImpl(
     private val navigation = StackNavigation<Config>()
     private val stack = childStack(
         source = navigation,
+        serializer = Config.serializer(),
         initialConfiguration = Config.Drawing, // The initial child component is List
         handleBackButton = true, // Automatically pop from the stack on back button presses
         childFactory = ::child,
@@ -71,12 +70,13 @@ class RootComponentImpl(
             onBackClick = navigation::pop,
         )
 
-    private sealed interface Config : Parcelable {
-        @Parcelize
+    @Serializable
+    private sealed interface Config {
+        @Serializable
         object Drawing : Config
-        @Parcelize
+        @Serializable
         object Output : Config
-        @Parcelize
+        @Serializable
         object Store : Config
     }
 }

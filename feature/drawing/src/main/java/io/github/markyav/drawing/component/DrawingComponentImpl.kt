@@ -28,7 +28,7 @@ class DrawingComponentImpl(
     val scope = CoroutineScope(Dispatchers.IO)
 
     init {
-        drawController.color.value = TODO() //drawingColors.first().color
+//        drawController.color.value = TODO() //drawingColors.first().color
         drawController.canvasOpacity.value = 0.6f
     }
 
