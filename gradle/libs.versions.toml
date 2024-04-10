@@ -38,6 +38,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-adaptive", version.ref = "adaptive" }
 windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "windowSizeClass" }
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
+decompose-extensions = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack", version.ref = "decompose" }
 drawbox = { group = "io.github.markyav.drawbox", name = "drawbox", version.ref = "drawbox" }
 
 [plugins]
