@@ -31,8 +31,6 @@ import io.github.markyav.ui.util.AndroidPreviewDevices
 @Composable
 fun OutputContent(component: OutputComponent, modifier: Modifier = Modifier) {
     val generatedImage by component.generatedImage.subscribeAsState()
-    val useSofganModel by component.useSofganModel.collectAsState()
-    val isSideBySideMode by component.isSideBySideMode.collectAsState()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -46,13 +44,7 @@ fun OutputContent(component: OutputComponent, modifier: Modifier = Modifier) {
                     .shadow(elevation = 4.dp)
                     .padding(4.dp)
                     .aspectRatio(1f)
-                    .weight(1f, fill = false)
-                    .pointerInput(Unit) {
-                        detectDragGestures { change, dragAmount ->
-                            change.consume()
-                            component.onAngleChanged(dragAmount.x, dragAmount.y)
-                        }
-                    },
+                    .weight(1f, fill = false),
             )
             is OutputComponent.GeneratedImage.Loading -> Surface(
                 modifier = Modifier
@@ -65,27 +57,16 @@ fun OutputContent(component: OutputComponent, modifier: Modifier = Modifier) {
                     CircularProgressIndicator()
                 }
             }
-        }
-
-        if (!isSideBySideMode) {
-            TextButton(onClick = component::onBackClick) {
-                Text(text = "Return")
-            }
-        }
-        Column(Modifier.selectableGroup()) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = useSofganModel,
-                    onClick = { component.onModelChanged(true) },
-                )
-                Text(text = "use Sofgan model")
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = !useSofganModel,
-                    onClick = { component.onModelChanged(false) },
-                )
-                Text(text = "use EG3D model")
+            is OutputComponent.GeneratedImage.Error -> Surface(
+                modifier = Modifier
+                    .shadow(elevation = 4.dp)
+                    .padding(4.dp)
+                    .aspectRatio(1f)
+                    .weight(1f, fill = false),
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text(text = "Error") // TODO: add more details of the error
+                }
             }
         }
     }

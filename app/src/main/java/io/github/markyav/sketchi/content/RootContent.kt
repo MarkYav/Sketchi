@@ -1,8 +1,6 @@
 package io.github.markyav.sketchi.content
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
@@ -16,38 +14,14 @@ import io.github.markyav.store.content.StoreContent
 
 @Composable
 fun RootContent(component: RootComponent, modifier: Modifier = Modifier) {
-    val showTwoPane by component.showTwoPane.collectAsState()
-
     Children(
         stack = component.childStack,
         modifier = modifier,
         animation = stackAnimation(fade() + scale()),
     ) {
         when (val child = it.instance) {
-            is RootComponent.Child.DrawingChild -> {
-                if (showTwoPane) {
-                    /*TwoPane(
-                        first = { DrawingContent(component = component.drawingComponent) },
-                        second = { OutputContent(component = component.outputComponent) },
-                        strategy = HorizontalTwoPaneStrategy(0.6f),
-                        displayFeatures = emptyList(),
-                    )*/
-                } else {
-                    DrawingContent(component = component.drawingComponent)
-                }
-            }
-            is RootComponent.Child.OutputChild -> {
-                if (showTwoPane) {
-//                    TwoPane(
-//                        first = { DrawingContent(component = component.drawingComponent) },
-//                        second = { OutputContent(component = component.outputComponent) },
-//                        strategy = HorizontalTwoPaneStrategy(0.6f),
-//                        displayFeatures = emptyList(),
-//                    )
-                } else {
-                    OutputContent(component = component.outputComponent)
-                }
-            }
+            is RootComponent.Child.DrawingChild -> DrawingContent(component = component.drawingComponent)
+            is RootComponent.Child.OutputChild -> OutputContent(component = component.outputComponent)
             is RootComponent.Child.StoreChild -> StoreContent(component = child.component)
         }
     }

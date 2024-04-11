@@ -8,15 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 class OutputComponentTest : OutputComponent {
     override val generatedImage: Value<OutputComponent.GeneratedImage> =
         MutableValue(OutputComponent.GeneratedImage.Loading)
-    override val useSofganModel: StateFlow<Boolean> = MutableStateFlow(false)
-    override val isSideBySideMode: StateFlow<Boolean> = MutableStateFlow(false)
-
-    override fun onAngleChanged(x: Float, y: Float) {
-    }
-
-    override fun onModelChanged(useSofgan: Boolean) {
-        TODO("Not yet implemented")
-    }
 
     override fun onBackClick() {
     }

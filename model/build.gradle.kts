@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "io.github.markyav.drawing"
+    namespace = "io.github.markyav.model"
     compileSdk = 34
 
     defaultConfig {
@@ -30,17 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
-    }
 }
 
 dependencies {
-    implementation(project(":ui"))
-    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -53,9 +45,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.decompose)
-    implementation(libs.decompose.extensions)
-    implementation(libs.drawbox)
-
-    implementation(libs.material.icons.extended)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.cio)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.content.negotiation)
+    implementation(libs.ktor.logging)
 }
