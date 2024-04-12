@@ -33,17 +33,9 @@ class NetworkControlNet : ControlNet {
         }
     }
 
-    override suspend fun process(
-        scribble: ImageBitmap,
-        prompt: String,
-        numberOfSteps: Int,
-        guidanceScale: Int,
-        seed: Int?,
-        additionalPrompt: String,
-        negativePrompt: String
-    ): ImageBitmap? {
+    override suspend fun process(params: ControlNet.ControlNetParams): ImageBitmap? {
         val stream = ByteArrayOutputStream()
-        scribble.asAndroidBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        params.scribble.asAndroidBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream)
         val byteArray = stream.toByteArray()
 
         try {

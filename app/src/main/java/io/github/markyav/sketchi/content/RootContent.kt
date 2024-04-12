@@ -20,8 +20,8 @@ fun RootContent(component: RootComponent, modifier: Modifier = Modifier) {
         animation = stackAnimation(fade() + scale()),
     ) {
         when (val child = it.instance) {
-            is RootComponent.Child.DrawingChild -> DrawingContent(component = component.drawingComponent)
-            is RootComponent.Child.OutputChild -> OutputContent(component = component.outputComponent)
+            is RootComponent.Child.DrawingChild -> DrawingContent(component = child.component)
+            is RootComponent.Child.OutputChild -> OutputContent(component = child.component)
             is RootComponent.Child.StoreChild -> StoreContent(component = child.component)
         }
     }

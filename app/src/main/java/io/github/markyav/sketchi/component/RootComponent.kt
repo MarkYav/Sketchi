@@ -9,12 +9,9 @@ import io.github.markyav.store.component.StoreComponent
 interface RootComponent {
     val childStack: Value<ChildStack<*, Child>>
 
-    val drawingComponent: DrawingComponent
-    val outputComponent: OutputComponent
-
     sealed class Child {
-        object DrawingChild : Child()
-        object OutputChild : Child()
-        class StoreChild(val component: StoreComponent) : Child()
+        data class DrawingChild(val component: DrawingComponent) : Child()
+        data class OutputChild(val component: OutputComponent) : Child()
+        data class StoreChild(val component: StoreComponent) : Child()
     }
 }

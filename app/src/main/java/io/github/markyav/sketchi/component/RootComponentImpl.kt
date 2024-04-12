@@ -10,6 +10,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import io.github.markyav.drawing.component.DrawingComponent
 import io.github.markyav.drawing.component.DrawingComponentImpl
+import io.github.markyav.model.ControlNet
 import io.github.markyav.output.component.OutputComponent
 import io.github.markyav.output.component.OutputComponentImpl
 import io.github.markyav.sketchi.component.RootComponent.Child
@@ -37,21 +38,28 @@ class RootComponentImpl(
 
     private fun child(config: Config, componentContext: ComponentContext): Child =
         when (config) {
-            is Config.Drawing -> DrawingChild
-            is Config.Output -> OutputChild
+            is Config.Drawing -> DrawingChild(drawingComponent(componentContext))
+            is Config.Output -> OutputChild(outputComponent(componentContext, config))
             is Config.Store -> StoreChild(storeComponent(componentContext))
         }
 
-    override val drawingComponent: DrawingComponent = DrawingComponentImpl(
-        componentContext = componentContext,
-        onGenerateClicked = { navigation.push(Config.Output) },
-        onSelectClicked = { navigation.push(Config.Store) },
-    )
+    private fun drawingComponent(componentContext: ComponentContext): DrawingComponent =
+        DrawingComponentImpl(
+            componentContext = componentContext,
+            onGenerateClicked = { params ->
+                navigation.push(Config.Output(params = ControlNet.ControlNetParams(
+                    scribble = params.scribble,
+                    prompt = params.prompt,
+                ))) },
+            onSelectClicked = { navigation.push(Config.Store) },
+        )
 
-    override val outputComponent: OutputComponent = OutputComponentImpl(
-        componentContext = componentContext,
-        onBackClick = navigation::pop,
-    )
+    private fun outputComponent(componentContext: ComponentContext, config: Config.Output): OutputComponent =
+        OutputComponentImpl(
+            componentContext = componentContext,
+            params = config.params,
+            onBackClick = navigation::pop,
+        )
 
     private fun storeComponent(componentContext: ComponentContext): StoreComponent =
         StoreComponentImpl(
@@ -69,7 +77,7 @@ class RootComponentImpl(
         @Serializable
         data object Drawing : Config
         @Serializable
-        data object Output : Config
+        data class Output(val params: ControlNet.ControlNetParams) : Config
         @Serializable
         data object Store : Config
     }

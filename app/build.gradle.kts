@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":feature:drawing"))
     implementation(project(":feature:store"))
     implementation(project(":feature:output"))
+    implementation(project(":model"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
