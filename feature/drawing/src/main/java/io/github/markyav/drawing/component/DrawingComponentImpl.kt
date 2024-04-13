@@ -1,6 +1,12 @@
 package io.github.markyav.drawing.component
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.Paint
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import io.github.markyav.drawbox.controller.DrawBoxSubscription
@@ -25,7 +31,7 @@ class DrawingComponentImpl(
     override fun generate() {
         onGenerateClicked.invoke(
             ControlNetItem(
-                scribble = drawnBitmap.value,
+                scribble = addBackground(drawnBitmap.value),
                 prompt = prompt.value,
             )
         )
@@ -33,5 +39,17 @@ class DrawingComponentImpl(
 
     override fun updatePrompt(newPrompt: String) {
         prompt.value = newPrompt
+    }
+
+    private fun addBackground(image: ImageBitmap): ImageBitmap {
+        val bmOverlay = ImageBitmap(image.width, image.height, image.config)
+        val canvas = Canvas(bmOverlay)
+        val paint = Paint()
+        paint.color = Color.White
+
+        canvas.drawRect(Rect(Offset.Zero, Size(512f, 512f)), paint)
+        canvas.drawImage(image, Offset.Zero, Paint())
+
+        return bmOverlay
     }
 }
