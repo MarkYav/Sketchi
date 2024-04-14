@@ -50,6 +50,11 @@ class RootComponentImpl(
                 navigation.push(Config.Output(params = ControlNet.ControlNetParams(
                     scribble = params.scribble,
                     prompt = params.prompt,
+                    numberOfSteps = params.numberOfSteps,
+                    guidanceScale = params.guidanceScale,
+                    seed = params.seed,
+                    additionalPrompt = params.additionalPrompt,
+                    negativePrompt = params.negativePrompt,
                 ))) },
             onSelectClicked = { navigation.push(Config.Store) },
         )

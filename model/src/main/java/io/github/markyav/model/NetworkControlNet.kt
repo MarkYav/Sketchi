@@ -13,7 +13,6 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
-import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.readBytes
@@ -23,13 +22,13 @@ import io.ktor.http.isSuccess
 import java.io.ByteArrayOutputStream
 
 class NetworkControlNet : ControlNet {
-    private val URL = "http://10.0.2.2:5000/predict"
+    private val URL = "https://mayar000-test2.hf.space/generate"
     private val client = HttpClient() {
         install(Logging) {
             logger = Logger.SIMPLE
         }
         install(HttpTimeout) {
-            requestTimeoutMillis = 10_000
+            requestTimeoutMillis = Long.MAX_VALUE //10_000
         }
     }
 
@@ -40,17 +39,19 @@ class NetworkControlNet : ControlNet {
 
         try {
             val response = client.post(URL) {
-                header(HttpHeaders.ContentType, "image/jpeg")
                 setBody(MultiPartFormDataContent(
                     formData {
                         append(
-                            key = "file",
+                            key = "scribble",
                             value = byteArray,
                             headers = Headers.build {
                                 append(HttpHeaders.ContentType, "image/jpeg")
                                 append(HttpHeaders.ContentDisposition, "filename=Mark.jpg")
                             }
                         )
+                        append(key = "prompt", value = params.prompt)
+                        append(key = "num_inference_steps", value = params.numberOfSteps)
+                        append(key = "negative_prompt", value = params.negativePrompt)
                     }
                 ))
             }

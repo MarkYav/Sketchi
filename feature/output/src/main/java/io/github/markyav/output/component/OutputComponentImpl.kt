@@ -3,7 +3,7 @@ package io.github.markyav.output.component
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import io.github.markyav.model.ControlNet
-import io.github.markyav.model.MockControlNet
+import io.github.markyav.model.NetworkControlNet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ class OutputComponentImpl(
 ) : OutputComponent, ComponentContext by componentContext {
     override val generatedImage: MutableValue<OutputComponent.GeneratedImage> =
         MutableValue(OutputComponent.GeneratedImage.Loading)
-    private val model: ControlNet = MockControlNet()
+    private val model: ControlNet = NetworkControlNet()
 
     init {
         CoroutineScope(Dispatchers.IO).launch {

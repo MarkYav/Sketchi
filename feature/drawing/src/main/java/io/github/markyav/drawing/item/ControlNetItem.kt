@@ -19,7 +19,7 @@ data class ControlNetItem(
     val scribble: ImageBitmap,
     val prompt: String,
     @IntRange(from = 1, to = 100)
-    val numberOfSteps: Int = 20,
+    val numberOfSteps: Int = 10,
     @FloatRange(from = 0.1, to = 30.0)
     val guidanceScale: Float = 9f,
     @IntRange(from = 0, to = 2147483647)

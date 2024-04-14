@@ -24,7 +24,7 @@ interface ControlNet {
         @Serializable
         val prompt: String,
         @Serializable @IntRange(from = 1, to = 100)
-        val numberOfSteps: Int = 20,
+        val numberOfSteps: Int = 10,
         @Serializable @FloatRange(from = 0.1, to = 30.0)
         val guidanceScale: Float = 9f,
         @Serializable @IntRange(from = 0, to = 2147483647)
