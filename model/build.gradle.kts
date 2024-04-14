@@ -51,4 +51,6 @@ dependencies {
     implementation(libs.ktor.serialization)
     implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.logging)
+
+    implementation(libs.kotlinx.serialization.json) // Adjust version as needed
 }
