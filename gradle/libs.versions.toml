@@ -3,11 +3,11 @@ agp = "8.5.0-alpha08"
 kotlin = "2.0.0-RC2"
 ksp = "2.0.0-RC2-1.0.20"
 
-coreKtx = "1.12.0"
+coreKtx = "1.13.1"
 lifecycleRuntimeKtx = "2.7.0"
 
-composeBom = "2024.04.00"
-activityCompose = "1.8.2"
+composeBom = "2024.05.00"
+activityCompose = "1.9.0"
 appcompat = "1.6.1"
 
 junit = "4.13.2"
@@ -17,7 +17,6 @@ espressoCore = "3.5.1"
 room = "2.6.1"
 ktor = "2.3.0"
 
-adaptive = "0.27.0"
 windowSizeClass = "1.2.1"
 
 decompose = "3.0.0-beta01"
@@ -40,7 +39,6 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 
 # UI extensions
 windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "windowSizeClass" }
-accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-adaptive", version.ref = "adaptive" }
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
 # Testing
