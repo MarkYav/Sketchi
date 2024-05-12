@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
     implementation(project(":ui"))
     implementation(project(":data"))
 

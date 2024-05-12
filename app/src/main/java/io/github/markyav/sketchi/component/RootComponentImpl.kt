@@ -8,9 +8,10 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
+import io.github.markyav.domain.ControlNetParams
+import io.github.markyav.domain.DiffusionModelParams
 import io.github.markyav.drawing.component.DrawingComponent
 import io.github.markyav.drawing.component.DrawingComponentImpl
-import io.github.markyav.model.ControlNet
 import io.github.markyav.output.component.OutputComponent
 import io.github.markyav.output.component.OutputComponentImpl
 import io.github.markyav.sketchi.component.RootComponent.Child
@@ -47,14 +48,16 @@ class RootComponentImpl(
         DrawingComponentImpl(
             componentContext = componentContext,
             onGenerateClicked = { params ->
-                navigation.push(Config.Output(params = ControlNet.ControlNetParams(
+                navigation.push(Config.Output(params = ControlNetParams(
                     scribble = params.scribble,
-                    prompt = params.prompt,
-                    numberOfSteps = params.numberOfSteps,
-                    guidanceScale = params.guidanceScale,
-                    seed = params.seed,
-                    additionalPrompt = params.additionalPrompt,
-                    negativePrompt = params.negativePrompt,
+                    diffusionModelParams = DiffusionModelParams(
+                        prompt = params.prompt,
+                        numberOfSteps = params.numberOfSteps,
+                        guidanceScale = params.guidanceScale,
+                        seed = params.seed,
+                        additionalPrompt = params.additionalPrompt,
+                        negativePrompt = params.negativePrompt,
+                    ),
                 ))) },
             onSelectClicked = { navigation.push(Config.Store) },
         )
@@ -82,7 +85,7 @@ class RootComponentImpl(
         @Serializable
         data object Drawing : Config
         @Serializable
-        data class Output(val params: ControlNet.ControlNetParams) : Config
+        data class Output(val params: ControlNetParams) : Config
         @Serializable
         data object Store : Config
     }

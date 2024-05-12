@@ -2,7 +2,8 @@ package io.github.markyav.output.component
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
-import io.github.markyav.model.ControlNet
+import io.github.markyav.domain.ControlNet
+import io.github.markyav.domain.ControlNetParams
 import io.github.markyav.model.NetworkControlNet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class OutputComponentImpl(
     componentContext: ComponentContext,
-    params: ControlNet.ControlNetParams,
+    params: ControlNetParams,
     val onBackClick: () -> Unit,
 ) : OutputComponent, ComponentContext by componentContext {
     override val generatedImage: MutableValue<OutputComponent.GeneratedImage> =

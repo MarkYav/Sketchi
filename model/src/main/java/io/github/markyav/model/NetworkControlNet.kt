@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import io.github.markyav.domain.ControlNet
+import io.github.markyav.domain.ControlNetParams
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.logging.Logger
@@ -32,7 +34,7 @@ class NetworkControlNet : ControlNet {
         }
     }
 
-    override suspend fun process(params: ControlNet.ControlNetParams): ImageBitmap? {
+    override suspend fun process(params: ControlNetParams): ImageBitmap? {
         val stream = ByteArrayOutputStream()
         params.scribble.asAndroidBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream)
         val byteArray = stream.toByteArray()
@@ -49,9 +51,9 @@ class NetworkControlNet : ControlNet {
                                 append(HttpHeaders.ContentDisposition, "filename=Mark.jpg")
                             }
                         )
-                        append(key = "prompt", value = params.prompt)
-                        append(key = "num_inference_steps", value = params.numberOfSteps)
-                        append(key = "negative_prompt", value = params.negativePrompt)
+                        append(key = "prompt", value = params.diffusionModelParams.prompt)
+                        append(key = "num_inference_steps", value = params.diffusionModelParams.numberOfSteps)
+                        append(key = "negative_prompt", value = params.diffusionModelParams.negativePrompt)
                     }
                 ))
             }

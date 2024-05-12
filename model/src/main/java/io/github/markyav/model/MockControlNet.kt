@@ -4,9 +4,11 @@ import android.graphics.Bitmap
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import io.github.markyav.domain.ControlNet
+import io.github.markyav.domain.ControlNetParams
 
 class MockControlNet : ControlNet {
-    override suspend fun process(params: ControlNet.ControlNetParams): ImageBitmap? {
+    override suspend fun process(params: ControlNetParams): ImageBitmap? {
         return invert(params.scribble.asAndroidBitmap())?.asImageBitmap()
     }
 
