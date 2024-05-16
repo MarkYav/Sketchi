@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import io.github.markyav.data.room.SavedControlNetParamsRepositoryImpl
+import io.github.markyav.domain.ControlNetParams
 import io.github.markyav.store.item.SavedSketchItem
 import io.github.markyav.ui.util.toTimeAgo
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 class StoreComponentImpl(
     componentContext: ComponentContext,
     applicationContext: Context,
-    val onSelect: (ImageBitmap) -> Unit,
+    val onSelect: (ControlNetParams) -> Unit,
     val onBackClick: () -> Unit,
 ) : StoreComponent, ComponentContext by componentContext {
     private val repository = SavedControlNetParamsRepositoryImpl.getSketchRepositoryImpl(applicationContext)
@@ -32,7 +33,8 @@ class StoreComponentImpl(
     }
 
     override fun select(bitmap: ImageBitmap) {
-        onSelect(bitmap)
+        //onSelect(bitmap)
+        TODO("implement saving controlNet params")
     }
 
     override fun onBackClick() {

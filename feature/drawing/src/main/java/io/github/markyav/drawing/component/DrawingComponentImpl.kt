@@ -8,18 +8,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Paint
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.value.MutableValue
 import io.github.markyav.drawbox.controller.DrawBoxSubscription
 import io.github.markyav.drawbox.controller.DrawController
-import io.github.markyav.drawing.item.ControlNetItem
 
 class DrawingComponentImpl(
     componentContext: ComponentContext,
-    val onGenerateClicked: (params: ControlNetItem) -> Unit,
-    val onSelectClicked: () -> Unit,
+    val onFinishDrawing: (scribble: ImageBitmap) -> Unit,
+    val onBackClick: () -> Unit,
 ) : DrawingComponent, ComponentContext by componentContext {
     override val drawController: DrawController = DrawController()
-    override val prompt: MutableValue<String> = MutableValue("")
     private val drawnBitmap = drawController.getBitmap(512, DrawBoxSubscription.FinishDrawingUpdate)
 
     init {
@@ -28,17 +25,12 @@ class DrawingComponentImpl(
         drawController.canvasOpacity.value = 0.6f
     }
 
-    override fun generate() {
-        onGenerateClicked.invoke(
-            ControlNetItem(
-                scribble = addBackground(drawnBitmap.value),
-                prompt = prompt.value,
-            )
-        )
+    override fun finishDrawing() {
+        onFinishDrawing.invoke(addBackground(drawnBitmap.value))
     }
 
-    override fun updatePrompt(newPrompt: String) {
-        prompt.value = newPrompt
+    override fun onBackClick() {
+        this.onBackClick.invoke()
     }
 
     private fun addBackground(image: ImageBitmap): ImageBitmap {

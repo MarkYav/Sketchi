@@ -1,4 +1,4 @@
-package io.github.markyav.drawing.item
+package io.github.markyav.configuration.item
 
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange

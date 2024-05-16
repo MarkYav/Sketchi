@@ -1,18 +1,17 @@
 package io.github.markyav.drawing.component
 
-import com.arkivanov.decompose.value.Value
 import io.github.markyav.drawbox.controller.DrawController
 
 class DrawingComponentTest: DrawingComponent {
-    override val drawController: DrawController = DrawController()
-    override val prompt: Value<String>
+    override val drawController: DrawController
         get() = TODO("Not yet implemented")
 
-    override fun generate() {
+    override fun finishDrawing() {
         TODO("Not yet implemented")
     }
 
-    override fun updatePrompt(newPrompt: String) {
+    override fun onBackClick() {
         TODO("Not yet implemented")
     }
+
 }
