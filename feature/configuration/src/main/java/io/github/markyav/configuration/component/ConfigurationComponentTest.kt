@@ -8,6 +8,16 @@ import kotlinx.coroutines.flow.StateFlow
 class ConfigurationComponentTest : ConfigurationComponent {
     override val prompt: StateFlow<String>
         get() = TODO("Not yet implemented")
+    override val runtime: StateFlow<Float>
+        get() = TODO("Not yet implemented")
+    override val seed: StateFlow<Int?>
+        get() = TODO("Not yet implemented")
+    override val guidanceScale: StateFlow<Float>
+        get() = TODO("Not yet implemented")
+    override val additionalPrompt: StateFlow<String>
+        get() = TODO("Not yet implemented")
+    override val negativePrompt: StateFlow<String>
+        get() = TODO("Not yet implemented")
     override val scribble: StateFlow<ImageBitmap?>
         get() = TODO("Not yet implemented")
     override val isGenerationEnabled: StateFlow<Boolean>
@@ -18,6 +28,26 @@ class ConfigurationComponentTest : ConfigurationComponent {
     }
 
     override fun updatePrompt(newPrompt: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateRuntime(newRuntime: Float) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateSeed(newSeed: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateGuidanceScale(newGuidanceScale: Float) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateAdditionalPrompt(newAdditionalPrompt: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateNegativePrompt(newNegativePrompt: String) {
         TODO("Not yet implemented")
     }
 

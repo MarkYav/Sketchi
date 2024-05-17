@@ -1,5 +1,6 @@
 package io.github.markyav.configuration.content.composables
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -34,16 +35,16 @@ fun DrawInput(
     OutlinedCard(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         if (scribble != null) {
             Box(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
-                Icon(
+                Image(
                     bitmap = scribble,
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .clickable(onClick = onOpenDrawing::invoke)
+                        .clickable(onClick = onOpenDrawing::invoke),
                 )
                 IconButton(
                     onClick = onRemoveDrawing,

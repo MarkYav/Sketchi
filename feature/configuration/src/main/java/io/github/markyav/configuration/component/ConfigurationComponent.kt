@@ -8,15 +8,29 @@ import io.github.markyav.drawing.component.DrawingComponent
 import kotlinx.coroutines.flow.StateFlow
 
 interface ConfigurationComponent {
-    val prompt: StateFlow<String>
+    val isGenerationEnabled: StateFlow<Boolean> // for generate button
+
     val scribble: StateFlow<ImageBitmap?>
-    val isGenerationEnabled: StateFlow<Boolean>
+    val prompt: StateFlow<String>
+    val runtime: StateFlow<Float>
+    val seed: StateFlow<Int?>
+    val guidanceScale: StateFlow<Float>
+    val additionalPrompt: StateFlow<String>
+    val negativePrompt: StateFlow<String>
 
     fun generate()
-    fun updatePrompt(newPrompt: String)
+
     fun drawScribble()
     fun deleteScribble()
+    fun updateScribble(scribble: ImageBitmap)
+
+    fun updatePrompt(newPrompt: String)
+    fun updateRuntime(newRuntime: Float)
+    fun updateSeed(newSeed: String)
+    fun updateGuidanceScale(newGuidanceScale: Float)
+    fun updateAdditionalPrompt(newAdditionalPrompt: String)
+    fun updateNegativePrompt(newNegativePrompt: String)
+
     fun selectFromSaved()
     fun importControlNetParams(params: ControlNetParams)
-    fun updateScribble(scribble: ImageBitmap)
 }
