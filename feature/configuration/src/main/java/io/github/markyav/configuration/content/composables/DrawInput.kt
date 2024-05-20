@@ -1,5 +1,9 @@
 package io.github.markyav.configuration.content.composables
 
+import android.provider.MediaStore
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -19,6 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,9 +35,20 @@ fun DrawInput(
     onOpenDrawing: () -> Unit,
     onRemoveDrawing: () -> Unit,
     onCreateDrawingClicked: () -> Unit,
-    onUploadDrawingClicked: () -> Unit,
+    onUploadDrawingClicked: (ImageBitmap) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val contextResolver = LocalContext.current.contentResolver
+    val pickMediaLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri != null) {
+            // https://stackoverflow.com/questions/56651444/deprecated-getbitmap-with-api-29-any-alternative-codes
+            val bitmap = MediaStore.Images.Media.getBitmap(contextResolver, uri)
+            onUploadDrawingClicked(bitmap.asImageBitmap())
+        }
+    }
+
     OutlinedCard(
         modifier = modifier
             .fillMaxWidth()
@@ -58,9 +75,17 @@ fun DrawInput(
                 Modifier.padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(text = "Draw", modifier = Modifier.weight(1f).clickable(onClick = onCreateDrawingClicked), textAlign = TextAlign.Center)
+                Text(text = "Draw", modifier = Modifier
+                    .weight(1f)
+                    .clickable(onClick = onCreateDrawingClicked),
+                    textAlign = TextAlign.Center,
+                )
                 VerticalDivider(modifier = Modifier.height(32.dp))
-                Text(text = "Upload sketch", modifier = Modifier.weight(1f).clickable(onClick = onUploadDrawingClicked), textAlign = TextAlign.Center)
+                Text(text = "Upload sketch", modifier = Modifier
+                    .weight(1f)
+                    .clickable(onClick = { pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }),
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }

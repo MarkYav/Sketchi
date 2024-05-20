@@ -65,7 +65,7 @@ fun ConfigurationContent(component: ConfigurationComponent, modifier: Modifier =
                     onOpenDrawing = component::drawScribble,
                     onRemoveDrawing = component::deleteScribble,
                     onCreateDrawingClicked = component::drawScribble,
-                    onUploadDrawingClicked = component::selectFromSaved
+                    onUploadDrawingClicked = component::updateScribble,
                 )
             }
             item {
