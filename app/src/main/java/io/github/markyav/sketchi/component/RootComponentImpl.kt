@@ -1,6 +1,7 @@
 package io.github.markyav.sketchi.component
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.ui.graphics.ImageBitmap
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
@@ -37,6 +38,7 @@ class RootComponentImpl(
         onDrawScribbleClicked = { scribble -> navigation.push(Config.Drawing(scribble = scribble)) },
         onGenerateClicked = { params -> navigation.push(Config.Output(params = params)) },
         onSelectFromSavedClicked = { navigation.push(Config.Store) },
+        makeToast = { message -> Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show() }
     )
     private val navigation = StackNavigation<Config>()
     private val stack = childStack(

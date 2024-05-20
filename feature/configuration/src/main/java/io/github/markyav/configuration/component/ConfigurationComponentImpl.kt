@@ -23,6 +23,7 @@ class ConfigurationComponentImpl(
     val onDrawScribbleClicked: (ImageBitmap?) -> Unit,
     val onGenerateClicked: (params: ControlNetParams) -> Unit,
     val onSelectFromSavedClicked: () -> Unit,
+    val makeToast: (String) -> Unit,
 ) : ConfigurationComponent, ComponentContext by componentContext {
     override val scribble: MutableStateFlow<ImageBitmap?> = MutableStateFlow(null)
     override val prompt: MutableStateFlow<String> = MutableStateFlow("")
@@ -111,6 +112,7 @@ class ConfigurationComponentImpl(
                 )
             ))
         }
+        makeToast("Configuration saved")
     }
 
     override fun updateScribble(scribble: ImageBitmap) {
