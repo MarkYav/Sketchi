@@ -1,7 +1,6 @@
 package io.github.markyav.configuration.component
 
 import androidx.compose.ui.graphics.ImageBitmap
-import com.arkivanov.decompose.value.Value
 import io.github.markyav.domain.ControlNetParams
 import kotlinx.coroutines.flow.StateFlow
 
@@ -64,6 +63,10 @@ class ConfigurationComponentTest : ConfigurationComponent {
     }
 
     override fun importControlNetParams(params: ControlNetParams) {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveConfiguration() {
         TODO("Not yet implemented")
     }
 

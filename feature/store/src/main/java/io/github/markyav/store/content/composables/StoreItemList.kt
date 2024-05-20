@@ -11,20 +11,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
-import io.github.markyav.store.item.SavedSketchItem
+import io.github.markyav.data.repository.SavedControlNetParamsDto
+import io.github.markyav.domain.ControlNetParams
+import io.github.markyav.domain.DiffusionModelParams
 import io.github.markyav.ui.util.AndroidPreviewDevices
+import java.time.LocalDateTime
 
 @Composable
-fun StoreItemList(items: List<SavedSketchItem>, onClick: (ImageBitmap) -> Unit, modifier: Modifier = Modifier) {
+fun StoreItemList(
+    items: List<SavedControlNetParamsDto>,
+    onClick: (ControlNetParams) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(200.dp),
+        columns = GridCells.Fixed(1),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier,
     ) {
         items(items) {
-            StoreItem(item = it, onClick = { onClick(it.sketch) })
+            StoreItem(item = it, onClick = { onClick(it.controlNetParams) })
         }
     }
 }
@@ -32,12 +39,16 @@ fun StoreItemList(items: List<SavedSketchItem>, onClick: (ImageBitmap) -> Unit, 
 @AndroidPreviewDevices
 @Composable
 fun StoreItemListPreview() {
-    val list = mutableListOf<SavedSketchItem>()
+    val list = mutableListOf<SavedControlNetParamsDto>()
     repeat(5) {
         list.add(
-            SavedSketchItem(
-                sketch = ImageBitmap(512, 512),
-                createdTime = "16.04.2023",
+            SavedControlNetParamsDto(
+                id = 0,
+                createdTime = LocalDateTime.now(),
+                controlNetParams = ControlNetParams(
+                    scribble = ImageBitmap(512, 512),
+                    diffusionModelParams = DiffusionModelParams(prompt = "a photo of a cat on a roof with a lot of tasty snacks")
+                )
             )
         )
     }

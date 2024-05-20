@@ -1,6 +1,8 @@
 package io.github.markyav.configuration.content
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,6 +43,22 @@ fun ConfigurationContent(component: ConfigurationComponent, modifier: Modifier =
 
     Column(modifier = modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.weight(1f)) {
+            item {
+                Row(
+                    Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp).fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    TextButton(onClick = component::selectFromSaved) {
+                        Text(text = "Select from saved")
+                    }
+                    TextButton(
+                        onClick = component::saveConfiguration,
+                        enabled = isGenerationEnabled,
+                    ) {
+                        Text(text = "Save current")
+                    }
+                }
+            }
             item {
                 DrawInput(
                     scribble = scribble,
@@ -77,7 +96,7 @@ fun ConfigurationContent(component: ConfigurationComponent, modifier: Modifier =
                 onValueChange = component::updateSeed,
             )
             Configuration(
-                title = "guidanceScale",
+                title = "Guidance scale",
                 extra = { Text(text = guidanceScale.toString()) },
             ) {
                 Slider(
@@ -86,7 +105,7 @@ fun ConfigurationContent(component: ConfigurationComponent, modifier: Modifier =
                     valueRange = 0f..10f,
                 )
             }
-            Configuration(title = "additionalPrompt") {
+            Configuration(title = "Additional prompt") {
                 OutlinedTextField(
                     value = additionalPrompt,
                     onValueChange = { newAdditionalPrompt -> component.updateAdditionalPrompt(newAdditionalPrompt) },
@@ -94,7 +113,7 @@ fun ConfigurationContent(component: ConfigurationComponent, modifier: Modifier =
                     shape = RoundedCornerShape(16.dp),
                 )
             }
-            Configuration(title = "negativePrompt") {
+            Configuration(title = "Negative prompt") {
                 OutlinedTextField(
                     value = negativePrompt,
                     onValueChange = { newNegativePrompt -> component.updateNegativePrompt(newNegativePrompt) },

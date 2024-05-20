@@ -1,12 +1,12 @@
 package io.github.markyav.store.component
 
-import androidx.compose.ui.graphics.ImageBitmap
 import com.arkivanov.decompose.value.Value
-import io.github.markyav.store.item.SavedSketchItem
+import io.github.markyav.data.repository.SavedControlNetParamsDto
+import io.github.markyav.domain.ControlNetParams
 
 interface StoreComponent {
-    val savedSketches: Value<List<SavedSketchItem>>
+    val savedSketches: Value<List<SavedControlNetParamsDto>>
 
-    fun select(bitmap: ImageBitmap)
+    fun select(params: ControlNetParams)
     fun onBackClick()
 }

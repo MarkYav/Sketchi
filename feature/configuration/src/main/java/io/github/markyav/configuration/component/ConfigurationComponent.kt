@@ -1,10 +1,7 @@
 package io.github.markyav.configuration.component
 
 import androidx.compose.ui.graphics.ImageBitmap
-import com.arkivanov.decompose.router.slot.ChildSlot
-import com.arkivanov.decompose.value.Value
 import io.github.markyav.domain.ControlNetParams
-import io.github.markyav.drawing.component.DrawingComponent
 import kotlinx.coroutines.flow.StateFlow
 
 interface ConfigurationComponent {
@@ -33,4 +30,5 @@ interface ConfigurationComponent {
 
     fun selectFromSaved()
     fun importControlNetParams(params: ControlNetParams)
+    fun saveConfiguration()
 }

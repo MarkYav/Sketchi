@@ -10,6 +10,8 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import io.github.markyav.configuration.component.ConfigurationComponentImpl
+import io.github.markyav.data.repository.SavedControlNetParamsRepository
+import io.github.markyav.data.room.SavedControlNetParamsRepositoryImpl
 import io.github.markyav.domain.ControlNetParams
 import io.github.markyav.drawing.component.DrawingComponent
 import io.github.markyav.drawing.component.DrawingComponentImpl
@@ -28,8 +30,10 @@ class RootComponentImpl(
     componentContext: ComponentContext,
     private val applicationContext: Context,
 ) : RootComponent, ComponentContext by componentContext {
+    private val repository: SavedControlNetParamsRepository = SavedControlNetParamsRepositoryImpl.getSketchRepositoryImpl(applicationContext)
     private val configurationComponent = ConfigurationComponentImpl(
         componentContext = componentContext,
+        repository = repository,
         onDrawScribbleClicked = { scribble -> navigation.push(Config.Drawing(scribble = scribble)) },
         onGenerateClicked = { params -> navigation.push(Config.Output(params = params)) },
         onSelectFromSavedClicked = { navigation.push(Config.Store) },
