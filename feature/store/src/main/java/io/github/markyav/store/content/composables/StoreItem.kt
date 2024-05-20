@@ -1,16 +1,13 @@
 package io.github.markyav.store.content.composables
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,7 +25,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,54 +45,50 @@ fun StoreItem(
 
     Card(
         onClick = onClick,
+        shape = RoundedCornerShape(16.dp),
         modifier = Modifier.fillMaxWidth(),
-        border = BorderStroke(1.dp, Color.Gray)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Image(
-                    item.controlNetParams.scribble,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-//                        .size(64.dp)
-//                        .fillMaxWidth()
-                        .weight(1f)
-                        .aspectRatio(1f)
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(Color.White)
+        Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+            Image(
+                item.controlNetParams.scribble,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(96.dp).clip(RoundedCornerShape(8.dp))
+            )
+            Spacer(modifier = Modifier.size(8.dp))
+            Column(
+                modifier = Modifier.height(96.dp).weight(1f),
+                verticalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    text = item.controlNetParams.diffusionModelParams.prompt,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis,
                 )
-                Spacer(modifier = Modifier.size(16.dp))
-                Column(
-                    modifier = Modifier.fillMaxWidth().fillMaxHeight().weight(2f),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    Text(
-                        text = item.controlNetParams.diffusionModelParams.prompt,
-                        style = MaterialTheme.typography.titleMedium,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Text(text = "Created ${item.createdTime.toTimeAgo()}")
-                }
-                IconButton(onClick = { isCollapsed.value = !isCollapsed.value }) {
-                    if (isCollapsed.value) {
-                        Icon(Icons.Default.KeyboardArrowDown, contentDescription = null)
-                    } else {
-                        Icon(Icons.Default.KeyboardArrowUp, contentDescription = null)
-                    }
-                }
+                Text(
+                    text = "Created ${item.createdTime.toTimeAgo()}",
+                    style = MaterialTheme.typography.labelMedium,
+                )
             }
-            if (!isCollapsed.value) {
-                Column(Modifier.padding(top = 16.dp)) {
-                    Text(text = "Runtime: " + item.controlNetParams.diffusionModelParams.numberOfSteps)
-                    Text(text = "Seed: " + (item.controlNetParams.diffusionModelParams.seed ?: "random"))
-                    Text(text = "Guidance scale: " + item.controlNetParams.diffusionModelParams.guidanceScale)
-                    Text(text = "Additional prompt: " + item.controlNetParams.diffusionModelParams.additionalPrompt)
-                    Text(text = "Negative prompt: " + item.controlNetParams.diffusionModelParams.negativePrompt)
+            IconButton(onClick = { isCollapsed.value = !isCollapsed.value }) {
+                if (isCollapsed.value) {
+                    Icon(Icons.Default.KeyboardArrowDown, contentDescription = null)
+                } else {
+                    Icon(Icons.Default.KeyboardArrowUp, contentDescription = null)
                 }
             }
         }
+        if (!isCollapsed.value) {
+            Column(Modifier.padding(8.dp)) {
+                Text(text = "Runtime: " + item.controlNetParams.diffusionModelParams.numberOfSteps)
+                Text(text = "Seed: " + (item.controlNetParams.diffusionModelParams.seed ?: "random"))
+                Text(text = "Guidance scale: " + item.controlNetParams.diffusionModelParams.guidanceScale)
+                Text(text = "Additional prompt: " + item.controlNetParams.diffusionModelParams.additionalPrompt)
+                Text(text = "Negative prompt: " + item.controlNetParams.diffusionModelParams.negativePrompt)
+            }
+        }
+
     }
 }
 

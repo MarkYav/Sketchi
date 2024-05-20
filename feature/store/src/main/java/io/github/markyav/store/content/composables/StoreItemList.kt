@@ -27,7 +27,6 @@ fun StoreItemList(
         columns = GridCells.Fixed(1),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier,
     ) {
         items(items) {

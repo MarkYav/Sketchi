@@ -10,21 +10,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import io.github.markyav.store.component.StoreComponent
 import io.github.markyav.store.content.composables.StoreItemList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StoreContent(component: StoreComponent, modifier: Modifier = Modifier) {
-    val savedSketchItems by component.savedSketches.subscribeAsState()
+    val savedSketchItems by component.savedSketches.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Saved sketches") },
+                title = { Text(text = "Saved configurations") },
                 navigationIcon = {
                     IconButton(onClick = component::onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
