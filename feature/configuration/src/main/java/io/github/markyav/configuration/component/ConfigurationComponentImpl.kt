@@ -94,6 +94,8 @@ class ConfigurationComponentImpl(
         guidanceScale.value = params.diffusionModelParams.guidanceScale
         additionalPrompt.value = params.diffusionModelParams.additionalPrompt
         negativePrompt.value = params.diffusionModelParams.negativePrompt
+
+        makeToast("Configuration loaded.")
     }
 
     override fun saveConfiguration() {
@@ -112,7 +114,7 @@ class ConfigurationComponentImpl(
                 )
             ))
         }
-        makeToast("Configuration saved")
+        makeToast("Configuration saved.")
     }
 
     override fun updateScribble(scribble: ImageBitmap) {
