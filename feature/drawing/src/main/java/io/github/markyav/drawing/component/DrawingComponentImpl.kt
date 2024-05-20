@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Paint
 import com.arkivanov.decompose.ComponentContext
 import io.github.markyav.drawbox.controller.DrawBoxSubscription
 import io.github.markyav.drawbox.controller.DrawController
+import io.github.markyav.ui.util.mapState
 
 class DrawingComponentImpl(
     componentContext: ComponentContext,
@@ -17,6 +18,7 @@ class DrawingComponentImpl(
     val onBackClick: () -> Unit,
 ) : DrawingComponent, ComponentContext by componentContext {
     override val drawController: DrawController = DrawController()
+    override val isCanvasBlank = drawController.undoCount.mapState { it == 0 }
     private val drawnBitmap = drawController.getBitmap(512, DrawBoxSubscription.FinishDrawingUpdate)
 
     init {
